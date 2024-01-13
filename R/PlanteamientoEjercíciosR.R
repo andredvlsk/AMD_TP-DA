@@ -16,6 +16,8 @@ is.numeric(numero)
 suma <- numero + 2
 doble <- numero * 2
 
+result <- numero + doble
+
 #Ejercicio 4: Vectores y Listas
 #Enunciado: Crea un vector llamado edades con las edades de tres personas y una lista llamada informacion con el nombre y la edad de una persona.
 
@@ -51,12 +53,12 @@ compara <- (numero * 2) > edades[3]
 v <- TRUE
 a <- TRUE
 
-ambastrue <- (v & a) == TRUE
+ambastrue <- v & a
 
 #Ejercicio 10: Utilizar Operador Lógico
 #Enunciado: Define una variable lógica, verdadero , con valor TRUE . Comprueba que su valor NO sea verdadero.
 
 verdadero <- TRUE
 
-noesvdd <- verdadero == "verdadero"
+noesvdd <- !verdadero
 
