@@ -112,5 +112,69 @@ ggplot(mpg, aes(x = cyl, y = hwy)) +
   facet_wrap(~trans)
 
 
-  
+#RETO GUIADO ANALISIS ESTADISTICO
 
+data(package = "mlbench", PimaIndiansDiabetes2)
+
+head(PimaIndiansDiabetes2, n = 10)
+
+mean(PimaIndiansDiabetes2$glucose, na.rm = TRUE)
+sd(PimaIndiansDiabetes2$glucose, na.rm = TRUE)
+
+summary(PimaIndiansDiabetes2$glucose)
+
+table(PimaIndiansDiabetes2$diabetes)
+prop.table(table(PimaIndiansDiabetes2$diabetes))
+
+summary(PimaIndiansDiabetes2)
+
+hist(PimaIndiansDiabetes2$glucose)
+
+t <- t.test(glucose ~ diabetes, data = PimaIndiansDiabetes2)
+print(t)
+
+library(dplyr)
+datos <- PimaIndiansDiabetes2 %>% na.omit()
+cor(datos$glucose, datos$pressure)
+
+
+#utilizando mtcars
+data(mtcars)
+
+head(mtcars, n=5)
+
+summary(mtcars)
+
+clean <- mtcars %>% select(mpg, cyl, disp, hp, wt, am) %>%
+  mutate(am = factor(am, levels = c(0,1), labels = c("Automatico", 'Manual')), 
+         cyl = as.factor(cyl))
+
+summary(clean)
+
+correlation <- cor(clean[,c("mpg", "disp", "hp", "wt")])
+correlation
+pairs(clean[,c("mpg", "disp", "hp", "wt")])
+
+library(ggplot2)
+
+ggplot(data = clean, aes(x = am, y = mpg, fill = am)) +
+  geom_boxplot() +
+  labs(title = "Relación entre consumo y tipo de transmisión", x = "Tipo de transmisión",
+       y = "Consumo (millas por galón")
+
+ggplot(data = clean, aes(x = cyl, y = mpg, fill = cyl)) +
+  geom_boxplot() +
+  labs(title = "Relación entre consumo y tipo de transmisión", x = "Numero de cilidros",
+       y = "Consumo (millas por galón")
+
+
+t <- t.test(mpg ~ am, data = clean)
+print(t)
+
+
+anova <- aov(mpg ~ cyl, data = clean)
+summary(anova)
+
+
+model <- lm(mpg ~ hp + disp + wt, data = clean)
+summary(model)
