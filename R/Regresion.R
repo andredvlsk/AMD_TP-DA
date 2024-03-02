@@ -88,4 +88,5 @@ install.packages("stats")
 install.packages("xts")
 install.packages("zoo")
 
+install.packages("caret")
 
